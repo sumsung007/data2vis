@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Use correct character set. -->
+  <meta charset="utf-8">
+  <!-- Tell IE to use the latest, best version. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <title>Hello World!</title>
+  <script src="../web_lib/cesium/Build/Cesium/Cesium.js"></script>
+  <style>
+      @import url(../web_lib/cesium/Build/Cesium/Widgets/widgets.css);
+      html, body, #cesiumContainer {
+          width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+      }
+  </style>
+</head>
+<body>
+  <div id="cesiumContainer"></div>
+  <script>
+    var viewer = new Cesium.Viewer('cesiumContainer');
+	
+	var wyoming = viewer.entities.add({
+	  name : 'Wyoming',
+	  polygon : {
+		hierarchy : Cesium.Cartesian3.fromDegreesArray([
+								  98.5,32.0,
+								  104.5,32.0,
+								  104.5,23.0,
+								  98.5,23.0]),
+		material : Cesium.Color.BLUE.withAlpha(0.32),
+		outline : true,
+		outlineColor : Cesium.Color.BLACK
+	  }
+	});
+	wyoming.polygon.height = -2000;
+	wyoming.polygon.extrudedHeight = 50000;
+	
+
+	var redBox = viewer.entities.add({
+		name : 'Red box with black outline',
+		position: Cesium.Cartesian3.fromDegrees(104.0, 30.0, 300000.0),
+		box : {
+			dimensions : new Cesium.Cartesian3(20000.0, 20000.0, 150000.0),
+			material : Cesium.Color.RED.withAlpha(0.8),
+			outline : true,
+			outlineColor : Cesium.Color.BLACK
+		}
+	});
+	
+	var greenCylinder = viewer.entities.add({
+		name : 'Green cylinder with black outline',
+		position: Cesium.Cartesian3.fromDegrees(100.0, 25.0, 20000.0),
+		cylinder : {
+			length : 400000.0,
+			topRadius : 20000.0,
+			bottomRadius : 20000.0,
+			material : Cesium.Color.GREEN.withAlpha(0.5),
+			outline : true,
+			outlineColor : Cesium.Color.DARK_GREEN
+		}
+	});
+
+	var redCone = viewer.entities.add({
+		name : 'Red cone',
+		position: Cesium.Cartesian3.fromDegrees(105.0, 30.0, 20000.0),
+		cylinder : {
+			length : 400000.0,
+			topRadius : 0.0,
+			bottomRadius : 20000.0,
+			material : Cesium.Color.RED
+		}
+	});
+		
+	viewer.zoomTo(wyoming);	
+  </script>
+</body>
+</html>
